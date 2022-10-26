@@ -4,13 +4,8 @@ import Service from './Pages/Service'
 import Package from './Pages/Package'
 import AddService from './Pages/AddService'
 import AddPackage from './Pages/AddPackage'
-import { useDispatch } from 'react-redux'
 
 function App() {
-
-  const dispatch = useDispatch()
-
-
 
   return (
     <BrowserRouter>

@@ -16,7 +16,7 @@ app.use(cors())
 
 app.use('/', Routes)
 
-const CONNECTION_URL = ""
+const CONNECTION_URL = "connection String here"
 const PORT = 5000
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -70,7 +70,7 @@ export const deleteService = async (req, res) => {
 
 export const getPackage = async (req, res) => {
     try {
-        const packageMessages = await (packageMessage.find()).populate('servicesArr.service_id')
+        const packageMessages = await packageMessage.find().populate('servicesArr.service_id')
 
         res.status(200).json(packageMessages)
     } catch (error) {
@@ -95,7 +95,7 @@ export const updatePackage = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json("no service found")
 
     try {
-        const updatedPackage = await packageMessage.findByIdAndUpdate(id, newpackage, { new: true }).populate('servicesArr.service_id')
+        const updatedPackage = await packageMessage.findByIdAndUpdate(id, newpackage, { new: true })
         res.json(updatedPackage)
     } catch (error) {
         console.log(error)
@@ -109,7 +109,7 @@ export const createPackage = async (req, res) => {
 
 
     try {
-        await (await newPackages.save()).populate('servicesArr.service_id')
+        await await newPackages.save()
 
         res.status(201).json(newPackages)
     } catch (error) {

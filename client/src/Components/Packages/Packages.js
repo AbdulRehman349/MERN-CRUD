@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { deletePackage } from '../../actions/service'
-import { getPackage } from '../../actions/service'
+import { deletePackage, getPackage } from '../../actions/service'
 
 
 
@@ -11,10 +10,11 @@ const Packages = () => {
     const navigate = useNavigate()
     const packages = useSelector((state) => state.packages)
 
-
     useEffect(() => {
         dispatch(getPackage())
     }, [])
+
+
 
     const calPrice = (pack) => {
         let total = 0
@@ -33,15 +33,14 @@ const Packages = () => {
             </div>
             {!packages.length ? <h3>No Available Packages</h3> : (
                 <div className='space-y-10 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10 md:space-y-0'>
-                    {packages.map((pack) => (
+                    {packages?.map((pack) => (
                         <div key={pack._id} className="col-sm-6 ">
                             <div className="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{pack.packagename}</h5>
                                 <p className="font-normal text-gray-700 dark:text-gray-400">{pack.description}</p>
-                                {pack.servicesArr.map((service) => (
-
-                                    <h6 key={service._id} className="font-normal text-gray-700 dark:text-gray-400">{service.service_id.servicename} X {service.service_qty}</h6>
-
+                                {/* {console.log(pack.servicesArr)} */}
+                                {pack.servicesArr?.map((service) => (
+                                    < h6 key={service.service_id._id} className="font-normal text-gray-700 dark:text-gray-400" > {service.service_id.servicename} X {service.service_qty}</h6>
                                 ))}
                                 <h6 className="font-normal text-gray-700 dark:text-gray-400">Price:${calPrice(pack)}</h6>
                                 <div className=' flex justify-around items-center mt-2'>
@@ -57,7 +56,8 @@ const Packages = () => {
                         </div>
                     ))}
                 </div>
-            )}
+            )
+            }
         </>
     )
 }
